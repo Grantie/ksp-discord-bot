@@ -1,16 +1,17 @@
-const DiscordJS = require("discord.js");
-const WOKCommands = require("wokcommands");
+const { Client, IntentsBitField, Partials } = require("discord.js");
+const wok = require("wokcommands");
 const path = require("path");
 require("dotenv").config();
+require("mongoose").set('strictQuery', false);
 
-const { Intents } = DiscordJS;
-
-const client = new DiscordJS.Client({
+const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_MEMBERS,
+    IntentsBitField.Flags.Guilds,
+    IntentsBitField.Flags.GuildMessages,
+    IntentsBitField.Flags.DirectMessages,
+    IntentsBitField.Flags.MessageContent,
   ],
+  partials: [Partials.Channel],
 });
 
 client.on("ready", () => {
@@ -18,19 +19,20 @@ client.on("ready", () => {
     keepAlive: true,
   };
 
-  const wok = new WOKCommands(client, {
+  new wok({
+    client,
     commandsDir: path.join(__dirname, "commands"),
     dbOptions,
-    mongoUri: ``,
+    mongoUri: `mongodb+srv://kspDiscordBot:${process.env.PASS}@bot.haumy.mongodb.net/?retryWrites=true&w=majority`,
     testServers: ["749767042785083451"],
     botOwners: ["874730179468079159"],
   });
 
-  const { commandHandler } = wok;
-
   require("./features/welcome.js")(client);
   require("./features/swearFilter.js")(client);
   require("./features/linkFilter.js")(client);
+
+  console.log("Bot is online")
 });
 
 client.login(process.env.TOKEN);
