@@ -23,7 +23,7 @@ client.on("ready", () => {
     client,
     commandsDir: path.join(__dirname, "commands"),
     dbOptions,
-    mongoUri: `mongodb+srv://kspDiscordBot:${process.env.PASS}@bot.haumy.mongodb.net/?retryWrites=true&w=majority`,
+    mongoUri: `mongodb+srv://kspDiscordBot:${process.env.PASS}@bot.haumy.mongodb.net/kspBot?retryWrites=true&w=majority`,
     testServers: ["749767042785083451"],
     botOwners: ["874730179468079159"],
   });
