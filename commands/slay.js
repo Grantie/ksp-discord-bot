@@ -9,7 +9,7 @@ module.exports = {
 
     cooldowns: {
         type: CooldownTypes.perUserPerGuild,
-        duration: "15 m",
+        duration: "45 m",
     },
 
     callback: ({ interaction, client }) => {
