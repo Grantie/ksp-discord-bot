@@ -33,6 +33,7 @@ client.on("ready", () => {
   require("./features/swearFilter.js")(client);
   require("./features/linkFilter.js")(client);
   require("./features/preventTalkingBump.js")(client);
+  require("./features/buttonHandler.js")(client);
 
   console.log("Bot is online")
 });
