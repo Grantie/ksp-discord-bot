@@ -28,10 +28,7 @@ client.on("ready", () => {
     testServers: ["749767042785083451"],
     botOwners: ["874730179468079159"],
   });
-
-  require("./features/welcome.js")(client);
-  require("./features/swearFilter.js")(client);
-  require("./features/linkFilter.js")(client);
+  
   require("./features/preventTalkingBump.js")(client);
   require("./features/buttonHandler.js")(client);
 
