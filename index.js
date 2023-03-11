@@ -46,7 +46,7 @@ client.on("ready", () => {
   require("./features/buttonHandler.js")(client);
   require("./features/counting.js")(client);
 
-  console.log("Bot is online")
+  console.log("Bot is online");
 });
 
 client.login(process.env.TOKEN);

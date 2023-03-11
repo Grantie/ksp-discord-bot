@@ -1,11 +1,10 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require('discord.js');
-const { CooldownTypes } = require("wokcommands");
+const { CooldownTypes, CommandType } = require("wokcommands");
 module.exports = {
     description: "Allows you to slay the day away!",
     category: "Fun",
 
-    slash: true,
-    testOnly: true,
+    type: CommandType.SLASH,
 
     cooldowns: {
         type: CooldownTypes.perUserPerGuild,

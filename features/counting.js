@@ -59,8 +59,9 @@ module.exports = (client) => {
                         msg.delete();
                     }
                 } else {
+                    var sendNoteContent = msg.content.replace("@","--");
                     await webhook.send({
-                        content: `:notepad_spiral: ${msg.content}\n:bulb: *Deleting in less than 10 seconds.*`,
+                        content: `:notepad_spiral: ${sendNoteContent}\n:bulb: *Deleting in less than 10 seconds; Mentions will not work.*`,
                         username: `Note By: ${msg.author.username}#${msg.author.discriminator}`,
                     }).then((webhookMsg) => {
                         setTimeout(() => {

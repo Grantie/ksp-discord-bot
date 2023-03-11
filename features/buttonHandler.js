@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = client => {
-    client.on("interactionCreate", (interaction) => {
+    client.on("interactionCreate", async (interaction) => {
         if (interaction.isButton()) {
             var id = interaction.customId;
 
@@ -12,6 +12,15 @@ module.exports = client => {
                 interaction.reply({
                     embeds: [howToSlayEmbed],
                     ephemeral: true,
+                });
+            }
+
+            if (id === "openTicket") {
+                let channel = message.guild.channels.cache.find(channel => channel.name === 'support');
+                const thread = await channel.threads.create({
+                    name: 'ticket-' + Math.floor(Math.random() * 9000000000000) + 1000000000000,
+                    type: ChannelType.PrivateThread,
+                    reason: 'Support Ticket',
                 });
             }
         }
