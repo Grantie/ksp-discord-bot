@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ChannelType } = require("discord.js");
 
 module.exports = client => {
     client.on("interactionCreate", async (interaction) => {
@@ -16,11 +16,21 @@ module.exports = client => {
             }
 
             if (id === "openTicket") {
-                let channel = message.guild.channels.cache.find(channel => channel.name === 'support');
+                let channel = interaction.message.guild.channels.cache.find(channel => channel.name === 'support');
+                const id = require("shortid").generate();
                 const thread = await channel.threads.create({
-                    name: 'ticket-' + Math.floor(Math.random() * 9000000000000) + 1000000000000,
+                    name: `t•${id}`,
                     type: ChannelType.PrivateThread,
                     reason: 'Support Ticket',
+                }).then(async (thread) => {
+                    await thread.members.add("874730179468079159");
+                    await thread.members.add(interaction.user.id);
+                    var supportTicketWelcomeEmbed = new EmbedBuilder()
+                        .setColor("2b2d31")
+                        .setDescription("**Welcome To Your Ticket!** *Ticket ID: `" + id + "`*\nPlease explain why you created this ticket, and the owner will be able to respond shortly. You may mention any member in this server to add them to this ticket. Thank you!\n\n**:warning: Please do not ping the owner.** Pinging the owner will not allow him to get to your ticket any faster.")
+                    thread.send({
+                        embeds: [supportTicketWelcomeEmbed],
+                    });
                 });
             }
         }
